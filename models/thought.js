@@ -31,46 +31,46 @@ const ReactionSchema = new schema(
         }
     }); 
     
-    // thought schema
-    const ThoughtsSchema = new schema(
-        {
-            thoughtText: {
-                type: String,
-                required: [true, 'Please enter a thought'],
-                minlength: 1,
-                maxlength: 280
-            },
-            createdAt: {
-                type: Date,
-                default: Date.now,
-                // use moment to format date on get
-                get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+// thought schema
+const ThoughtsSchema = new schema(
+    {
+        thoughtText: {
+            type: String,
+            required: [true, 'Please enter a thought'],
+            minlength: 1,
+            maxlength: 280
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            // use moment to format date on get
+            get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
             },
             username: {
                 type: String,
                 required: [true, 'Please enter a username'],
             },
             reactions: [ReactionSchema]
+    },
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true,
         },
-        {
-            toJSON: {
-                virtuals: true,
-                getters: true,
-            },
             id: false
-        }
-    );
+    }
+);
 
-    // get total count of reactions on retrieval
-    ThoughtsSchema.virtual('reactionCount').get(function() {
-        return this.reactions.length;
-    });
+// get total count of reactions on retrieval
+ThoughtsSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+});
 
-    // create the Thoughts model using the ThoughtsSchema
-    const Thoughts = model('Thoughts', ThoughtsSchema);
+// create the Thoughts model using the ThoughtsSchema
+const Thoughts = model('Thoughts', ThoughtsSchema);
 
-    // export the Thoughts model
-    module.exports = Thoughts;
+// export the Thoughts model
+module.exports = Thoughts;
 
     
 

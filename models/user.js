@@ -42,8 +42,8 @@ const userSchema = new Schema(
         return this.friends.length;
     });
 
-    // create the User model using the UserSchema
-    const User = model('User', userSchema);
+// create the User model using the UserSchema
+const User = model('User', userSchema);
 
-    // export the User model
-    module.exports = User;
+// export the User model
+module.exports = User;
