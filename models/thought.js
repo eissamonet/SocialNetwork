@@ -1,29 +1,28 @@
-const  { schema, model, Types } = require('mongoose');
+const  { Schema, model, Types } = require('mongoose');
 const moment = require('moment');
 
 // reaction schema
-const ReactionSchema = new schema(
-    {
-        // set custom id to avoid confusion with parent thought _id
-        reactionId: {
-            type: Types.ObjectId,
-            default: () => new Types.ObjectId()
-        },
-        reactionBody: {
-            type: String,
-            required: [true, 'Please enter a reaction'],
-            maxlength: 280
-        },
-        username: {
-            type: String,
-            required: [true, 'Please enter a username'],
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            // use moment to format date on get
-            get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
-        }
+const ReactionSchema = new Schema({
+    // set custom id to avoid confusion with parent thought _id
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+    },
+    reactionBody: {
+        type: String,
+        required: [true, 'Please enter a reaction'],
+        maxlength: 280
+    },
+    username: {
+        type: String,
+        required: [true, 'Please enter a username'],
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        // use moment to format date on get
+        get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+    }
     },
     {
         toJSON: {
@@ -32,7 +31,7 @@ const ReactionSchema = new schema(
     }); 
     
 // thought schema
-const ThoughtsSchema = new schema(
+const ThoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
@@ -62,15 +61,15 @@ const ThoughtsSchema = new schema(
 );
 
 // get total count of reactions on retrieval
-ThoughtsSchema.virtual('reactionCount').get(function() {
+ThoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
 
-// create the Thoughts model using the ThoughtsSchema
-const Thoughts = model('Thoughts', ThoughtsSchema);
+// create the Thought model using the ThoughtsSchema
+const Thought = model('Thought', ThoughtSchema);
 
-// export the Thoughts model
-module.exports = Thoughts;
+// export the Thought model
+module.exports = Thought;
 
     
 
