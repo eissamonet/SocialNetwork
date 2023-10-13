@@ -43,3 +43,7 @@ GIVEN a social network API
 
 ## Usage
 
+- To start the server, run the following command:
+'npm start'.
+
+- The user can test the routes using Insomnia. A message will be displayed in the terminal when the connection is successful.
