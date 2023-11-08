@@ -43,8 +43,10 @@ GIVEN a social network API
 
 ## Usage
 
-- To start the server, run the following command:
+- To start the server, run the following command in the terminal:
 'npm start'.
 
 - The user can test the routes using Insomnia Core. A message will be displayed in the terminal when the connection is successful.
+
+- View a walk-through video [here](https://drive.google.com/file/d/1uouz0sNUwkdQv7EiMO-pYvEOIlb9qRJ3/view).
 
